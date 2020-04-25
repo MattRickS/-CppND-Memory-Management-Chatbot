@@ -45,6 +45,50 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+ChatBot::ChatBot(const ChatBot &source)  // copy constructor
+{
+    std::cout << "COPYING chatbot" << std::endl;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+}
+
+ChatBot::ChatBot(ChatBot &&source)  // move constructor
+{
+    std::cout << "MOVING chatbot" << std::endl;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    source._image = NULL;
+}
+
+ChatBot &ChatBot::operator=(const ChatBot &source)  // copy assignment constructor
+{
+    std::cout << "COPY ASSIGNING chatbot" << std::endl;
+    if (this == &source) { return *this; }
+    if (_image != NULL) { delete _image; }  // May not be assigned depending on constructor
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+    return *this;
+}
+
+ChatBot &ChatBot::operator=(ChatBot &&source)  // move assignment constructor
+{
+    std::cout << "MOVE ASSIGNING chatbot" << std::endl;
+    if (this == &source) { return *this; }
+    if (_image != NULL) { delete _image; }  // May not be assigned depending on constructor
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    source._image = NULL;
+    return *this;
+}
+
 ////
 //// EOF STUDENT CODE
 
